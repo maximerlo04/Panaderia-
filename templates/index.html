@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-sin-fondo.png') }}">
+    <title>La Nueva America</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home_mobile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
+</head>
+<body>
+    <nav class="nav">
+        <i class="ti ti-menu-2 hamburger" id="hamburger"></i>
+        <img src="{{ url_for('static', filename='images/logo-sin-fondo.png') }}" class="img-logo">
+        <ul class="nav-list">
+            <a class="nav-links" href="#home">
+                <li class="nav-items">Inicio</li>
+            </a>
+            <a class="nav-links" href="{{ url_for('contact') }}">
+                <li class="nav-items">Contacto</li>
+            </a>
+            <a class="nav-links" href="{{ url_for('productos') }}">
+                <li class="nav-items">Productos</li>
+            </a>
+        </ul>
+        <a onclick="openCart()"><div class="shopping-cart">
+            <i class="ti ti-shopping-cart"></i>
+            <span>Carrito</span>
+            <span id="cartCount">0</span>
+        </div></a>
+    </nav>
+    <section id="home">
+        <div class="home-content">
+            <span>Martes a Domingos, desde las 7am - 20pm</span>
+            <h1>Panaderia La Nueva <br> America</h1>
+            <p>
+                Hace mas de 20 años cocinamos para vos. Arma tu pedido y veni a retirarlo, o te lo llevamos. 
+            </p>
+            <div class="hero-buttons">
+                <a href="#products"><button class="Products">Ver Productos</button></a>
+                <a href="#contact"><button class="Contact">Contactanos</button></a>
+            </div>
+        </div>
+        <div class="hero-art">
+            <div class="shelf">
+                <div class="crumb" style="width:70px; height:70px; top:20%; left:15%; animation-delay:0s;"></div>
+                <div class="crumb" style="width:50px; height:50px; top:60%; left:65%; animation-delay:2s;"></div>
+                <div class="crumb" style="width:90px; height:90px; top:10%; left:70%; animation-delay:4s;"></div>
+            </div>
+            <div class="hero-icon-row">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                    <path d="M8 34c0-12 10-20 24-20s24 8 24 20-8 16-24 16S8 46 8 34Z"/>
+                    <path d="M22 20c-2 4-2 8 0 12M32 17c-2 5-2 10 0 15M42 20c2 4 2 8 0 12"/>
+                </svg>
+
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 30c6-14 34-14 40 0-4 10-10 16-20 16S16 40 12 30Z"/>
+                    <path d="M18 30c4-6 24-6 28 0" stroke-dasharray="1 5"/>
+                </svg>
+
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 46V30l18-14 18 14v16"/>
+                    <path d="M14 46h36M14 38h36"/>
+                    <circle cx="32" cy="12" r="2" fill="currentColor" stroke="none"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+    <section id="products">
+        <h2>Arma tu pedido</h2>
+        <div class="grid-content">
+            {% for producto in productos %}
+            <div class="products-card">
+                <div class="card-loop"></div>
+                <div class="price">
+                    <p>$<br>{{producto['precio']}}<br>{{producto['unidad']}}</p>
+                </div>
+                <img class="img-product" src="{{ url_for('static', filename='images/Tienda/' + producto['imagen']) }}" >
+                <h3>{{producto['nombre']}}</h3>
+                <button class="add"
+                    data-id="{{producto['id']}}"
+                    data-name="{{producto['nombre']}}"
+                    data-price="{{producto['precio']}}">
+                    Agregar
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        <a class="button-link" href="{{ url_for('productos') }}"><button class="see-more">Ver mas</button></a>
+        <div class="overlay" id="overlay" onclick="closeCart()"></div>
+        <div class="drawer" id="drawer">
+            <div class="drawer-header">
+                <h3>Tu carrito</h3>
+                <button class="cls-button" onclick="closeCart()">X</button>
+            </div>
+            <div class="drawer-items" id="cartItems">
+                <span>No agregaste ningun producto</span>
+            </div>
+            <div class="drawer-footer" id="drawer-footer">
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+                <a class="button-link" href="{{ url_for('checkout') }}"><button class="checkout-btn">Confirmar Pedido</button></a>
+                <button class="clear-button" onclick="clearCart()">Vaciar Carrito</button>
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <div class="conteiner">
+            <div class="footer-direction">
+                <h3>Direccion</h3>
+                <p class="text">
+                    La Nueva America <br><br>
+                    America 1234, Villa Luzuriaga, <br> Buenos Aires
+                </p>
+            </div>
+            <div class="footer-hours">
+                <h3>Horarios</h3>
+                <p class="text">
+                    Mar a dom: 7:00 - 20:00 <br><br>
+                    Feriados: 7:00 - 18:00 <br><br>
+                    Lunes: cerrado
+                </p>
+            </div>
+            <div class="footer-social-media">
+                <h3>Redes sociales</h3>
+                <ul class="links-list">
+                    <a class="links" target="_blank" href="https://instagram.com">
+                        <li class="link-list-items">Instagram</li>
+                    </a><br>
+                    <a class="links" target="_blank" href="https://whatsapp.com">
+                        <li class="link-list-items">Whatsapp</li>
+                    </a><br>
+                    <a class="links" target="_blank" href="https://facebook.com">
+                        <li class="link-list-items">Facebook</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+</body>
+</html>

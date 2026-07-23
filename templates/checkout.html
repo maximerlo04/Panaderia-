@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-sin-fondo.png') }}">
+    <title>La Nueva America | Confirmar Pedido</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/checkout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/checkout_mobile.css') }}">
+    <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+</head>
+<body>
+    <nav class="nav">
+        <i class="ti ti-menu-2 hamburger" id="hamburger"></i>
+        <img src="{{ url_for('static', filename='images/logo-sin-fondo.png') }}" class="img-logo">
+        <ul class="nav-list">
+            <a class="nav-links" href="{{ url_for('Home') }}">
+                <li class="nav-items">Inicio</li>
+            </a>
+            <a class="nav-links" href="{{ url_for('contact') }}">
+                <li class="nav-items">Contacto</li>
+            </a>
+            <a class="nav-links" href="{{ url_for('productos') }}">
+                <li class="nav-items">Productos</li>
+            </a>
+        </ul>
+        <a onclick="openCart()"><div class="shopping-cart">
+            <i class="ti ti-shopping-cart"></i>
+            <span>Carrito</span>
+            <span id="cartCount">0</span>
+        </div></a>
+    </nav>
+    <section id="checkout">
+        <h2>Confirma tu pedido</h2>
+        <div class="checkout-grid">
+            <div class="checkout-summary">
+                <h3>Tu pedido</h3>
+                <div class="checkout-items"></div>
+                <div class="total-row">
+                    <span>Total</span>
+                    <span class="checkout-total">$0</span>
+                </div>
+            </div>
+            <div class="checkout-payment">
+                <h3>Forma de pago</h3>
+                <label class="payment-option">
+                    <input type="radio" name="pay" value="Efectivo" checked>
+                    Efectivo
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="pay" value="Mercado-pago">
+                    Mercado pago / otro
+                </label>
+                <button class="submit-order" onclick="realizarPedido()">Confirmar Pedido</button>
+                <p class="note">Al confirmar el pedido, se abre WhatsApp con el detalle de tu pedido para coordinar la entrega y el pago</p>
+            </div>
+        </div>
+        <div class="overlay" id="overlay" onclick="closeCart()"></div>
+        <div class="drawer" id="drawer">
+            <div class="drawer-header">
+                <h3>Tu carrito</h3>
+                <button class="cls-button" onclick="closeCart()">X</button>
+            </div>
+            <div class="drawer-items" id="cartItems">
+                <span>No agregaste ningun producto</span>
+            </div>
+            <div class="drawer-footer" id="drawer-footer">
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+                <a class="button-link" href="{{ url_for('checkout') }}"><button class="checkout-btn">Confirmar Pedido</button></a>
+                <button class="clear-button" onclick="clearCart()">Vaciar Carrito</button>
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <div class="conteiner">
+            <div class="footer-direction">
+                <h3>Direccion</h3>
+                <p class="text">
+                    La Nueva America <br><br>
+                    America 1234, Villa Luzuriaga, <br> Buenos Aires
+                </p>
+            </div>
+            <div class="footer-hours">
+                <h3>Horarios</h3>
+                <p class="text">
+                    Mar a dom: 7:00 - 20:00 <br><br>
+                    Feriados: 7:00 - 18:00 <br><br>
+                    Lunes: cerrado
+                </p>
+            </div>
+            <div class="footer-social-media">
+                <h3>Redes sociales</h3>
+                <ul class="links-list">
+                    <a class="links" target="_blank" href="https://instagram.com">
+                        <li class="link-list-items">Instagram</li>
+                    </a><br>
+                    <a class="links" target="_blank" href="https://whatsapp.com">
+                        <li class="link-list-items">Whatsapp</li>
+                    </a><br>
+                    <a class="links" target="_blank" href="https://facebook.com">
+                        <li class="link-list-items">Facebook</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+</body>
+</html>

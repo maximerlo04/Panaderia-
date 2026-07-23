@@ -1,0 +1,62 @@
+@media (max-width: 768px){
+    .nav-list{
+        display: none !important;
+    }
+
+    .nav-list.active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #2B1D14;
+        padding: 20px;
+        z-index: 100;
+        border-bottom: 1px solid #111;
+        align-items: center ;
+        gap: 20px;
+    }
+
+    .nav{
+        padding: 20px;
+    }
+
+    #hamburger{
+        display: block;
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+        margin-right: auto;
+        padding-left: 30px;
+    }
+
+    .img-logo{
+        display: none;
+    }
+
+    /*CONTACT*/
+
+    .content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding:0;
+    }
+
+    .content h3, .content p, .content h2{
+        margin: 0 20px;
+    }
+
+    /*FORM*/
+
+    .contact-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .contact-social-media h3{
+        margin-top: 10px;
+    }
+
+}

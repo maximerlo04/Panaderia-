@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/contact.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/contact_mobile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
+    <title>La Nueva America | Contacto</title>
+</head>
+<body>
+    <nav class="nav">
+        <i class="ti ti-menu-2 hamburger" id="hamburger"></i>
+        <a href="{{ url_for ('Home')}}"><img src="{{ url_for('static', filename='images/logo-sin-fondo.png') }}" class="img-logo"></a>
+        <ul class="nav-list">
+            <a class="nav-links" href="{{ url_for('Home') }}">
+                <li class="nav-items">Inicio</li>
+            </a>
+            <a class="nav-links" href="#contact">
+                <li class="nav-items">Contacto</li>
+            </a>
+            <a class="nav-links" href="{{ url_for('productos') }}">
+                <li class="nav-items">Productos</li>
+            </a>
+        </ul>
+        <a onclick="openCart()"><div class="shopping-cart">
+            <i class="ti ti-shopping-cart"></i>
+            <span>Carrito</span>
+            <span id="cartCount">0</span>
+        </div></a>
+    </nav>
+    <section id="contact">
+        <div class="content">
+            <h3>Hablemos</h3>
+            <h2>¿Tenes alguna consulta, algun pedido grande <br> o algo que quieras decirnos?</h2>
+            <p>No dudes en escribirnos por aca o por whatsapp que contestamos en el dia</p>
+        </div>
+        <div class="contact-grid">
+            <div class="content-media-contact">
+                <div class="contact-social-media">
+                    <h3>Donde estamos</h3>
+                    <p>America 3000, Villa Luzuriaga, Buenos Aires</p>
+                </div>
+                <div class="contact-social-media">
+                    <h3>Horarios</h3>
+                    <p>
+                        Martes a domingos : 7:00 AM - 20:00 PM <br>
+                        Feriados : 7:00 AM - 18:00 PM <br>
+                        Lunes: cerrado
+                    </p>
+                </div>
+                <div class="contact-social-media">
+                    <h3>Whatsapp</h3>
+                    <p>11 5865-1828</p>
+                </div>
+                <div class="contact-social-media">
+                    <h3>Nuestro email</h3>
+                    <p>lanuevaamerica@gmail.com</p>
+                </div>
+            </div>
+            <div class="form-content">
+                <form class="form">
+                    <label class="label">Nombre</label>
+                        <input type="text" name="name" placeholder="Tu nombre" class="input" required>
+                    <label class="label">Telefono</label>
+                        <input type="number" name="number" placeholder="11 1234-5678" class="input" required>
+                    <label class="label">Email</label>
+                        <input type="email" name="email" placeholder="tu@email.com" class="input" required>
+                    <label class="label">Mensaje</label>
+                        <textarea class="Message" name="message" placeholder="Contanos que necesitas" required></textarea>
+                    <button class="submit" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <div class="overlay" id="overlay" onclick="closeCart()"></div>
+        <div class="drawer" id="drawer">
+            <div class="drawer-header">
+                <h3>Tu carrito</h3>
+                <button class="cls-button" onclick="closeCart()">X</button>
+            </div>
+            <div class="drawer-items" id="cartItems">
+                <span>No agregaste ningun producto</span>
+            </div>
+            <div class="drawer-footer" id="drawer-footer">
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+                <a class="button-link" href="{{ url_for('checkout') }}">
+                    <button class="checkout-btn">Confirmar Pedido</button>
+                </a>
+                <button class="clear-button" onclick="clearCart()">Vaciar Carrito</button>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+</body>
+</html>

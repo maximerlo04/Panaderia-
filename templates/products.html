@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/products.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/products_mobile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
+    <title>La Nueva America | Productos</title>
+</head>
+<body>
+    <nav class="nav">
+        <i class="ti ti-menu-2 hamburger" id="hamburger"></i>
+        <img src="{{ url_for('static', filename='images/logo-sin-fondo.png') }}" class="img-logo">
+        <ul class="nav-list">
+            <a class="nav-links" href="{{ url_for('Home') }}">
+                <li class="nav-items">Inicio</li>
+            </a>
+            <a class="nav-links" href="{{ url_for('contact') }}">
+                <li class="nav-items">Contacto</li>
+            </a>
+            <a class="nav-links" href="#products">
+                <li class="nav-items">Productos</li>
+            </a>
+        </ul>
+        <a onclick="openCart()"><div class="shopping-cart">
+            <i class="ti ti-shopping-cart"></i>
+            <span>Carrito</span>
+            <span id="cartCount">0</span>
+        </div></a>
+    </nav>
+    <section id="products">
+        <h2>Arma tu pedido</h2>
+        <div class="filter">
+            <a href="{{ url_for ('productos')}}"><button class="tab">Todos</button></a>
+            <a href="{{ url_for ('productos', categoria='pan')}}"><button class="tab">Pan</button></a>
+            <a href="{{ url_for ('productos', categoria='facturas')}}"><button class="tab">Facturas</button></a>
+            <a href="{{ url_for ('productos', categoria='tortas')}}"><button class="tab">Tortas</button></a>
+            <a href="{{ url_for ('productos', categoria='otros')}}"><button class="tab">Otros</button></a>
+        </div>
+        <div class="grid-content">
+            {% for producto in productos %}
+            <div class="products-card">
+                <div class="card-loop"></div>
+                <div class="price">
+                    <p>$<br>{{producto['precio']}}<br>{{producto['unidad']}}</p>
+                </div>
+                <img class="img-product" src="{{ url_for('static', filename='images/Tienda/' + producto['imagen']) }}" >
+                <h3>{{producto['nombre']}}</h3>
+                <button class="add"
+                    data-id="{{producto['id']}}"
+                    data-name="{{producto['nombre']}}"
+                    data-price="{{producto['precio']}}">
+                    Agregar
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="overlay" id="overlay" onclick="closeCart()"></div>
+        <div class="drawer" id="drawer">
+            <div class="drawer-header">
+                <h3>Tu carrito</h3>
+                <button class="cls-button" onclick="closeCart()">X</button>
+            </div>
+            <div class="drawer-items" id="cartItems">
+                <span>No agregaste ningun producto</span>
+            </div>
+            <div class="drawer-footer" id="drawer-footer">
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+                <a class="button-link" href="{{ url_for('checkout') }}">
+                    <button class="checkout-btn">Confirmar Pedido</button>
+                </a>
+                <button class="clear-button" onclick="clearCart()">Vaciar Carrito</button>
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <div class="conteiner">
+            <div class="footer-direction">
+                <h3>Direccion</h3>
+                <p class="text">
+                    La Nueva America <br><br>
+                    America 1234, Villa Luzuriaga, <br> Buenos Aires
+                </p>
+            </div>
+            <div class="footer-hours">
+                <h3>Horarios</h3>
+                <p class="text">
+                    Mar a dom: 7:00 - 20:00 <br><br>
+                    Feriados: 7:00 - 18:00 <br><br>
+                    Lunes: cerrado
+                </p>
+            </div>
+            <div class="footer-social-media">
+                <h3>Redes sociales</h3>
+                <ul class="links-list">
+                    <a class="links" target="_blank" href="https://instagram.com">
+                        <li class="link-list-items">Instagram</li>
+                    </a><br>
+                    <a class="links" target="_blank" href="https://whatsapp.com">
+                        <li class="link-list-items">Whatsapp</li>
+                    </a><br>
+                    <a class="links" target="_blank" href="https://facebook.com">
+                        <li class="link-list-items">Facebook</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+</body>
+</html>
